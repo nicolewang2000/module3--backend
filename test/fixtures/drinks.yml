@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  direction: MyString
+  image: MyString
+  glass: MyString
+  alcoholic: false
+
+two:
+  direction: MyString
+  image: MyString
+  glass: MyString
+  alcoholic: false
