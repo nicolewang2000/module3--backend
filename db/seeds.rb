@@ -1,4 +1,4 @@
-classes = [DrinkIngredient, Drink, User, Ingredient, Rating]
+classes = [DrinkIngredient, Rating, Drink, User, Ingredient]
 classes.each{|c|
     c.destroy_all 
     c.reset_pk_sequence
@@ -31,4 +31,25 @@ ids.map{|id|
     }
 }
 
+User.create(name: "Nicole Wang", username:"iamnicole")
+User.create(name: "Annalise Hunt", username:"annahere")
+User.create(name: "Madelyn Smith", username:"itsmaddy")
+User.create(name: "Olivia Grace", username:"livie")
+User.create(name: "John Smith", username:"johnsmith")
+
+
+Drink.all.each{|drink| Rating.create(drink_id: drink.id, user_id: 1, score: 4)}
+
+Rating.create(drink_id: 1, user_id: 2, score: 5)
+Rating.create(drink_id: 1, user_id: 3, score: 1)
+Rating.create(drink_id: 1, user_id: 4, score: 3)
+Rating.create(drink_id: 1, user_id: 5, score: 2)
+Rating.create(drink_id: 2, user_id: 2, score: 1)
+Rating.create(drink_id: 2, user_id: 3, score: 3)
+Rating.create(drink_id: 3, user_id: 3, score: 1)
+Rating.create(drink_id: 3, user_id: 4, score: 2)
+Rating.create(drink_id: 4, user_id: 3, score: 2)
+Rating.create(drink_id: 5, user_id: 2, score: 1)
+Rating.create(drink_id: 5, user_id: 5, score: 3)
+Rating.create(drink_id: 158, user_id: 4, score: 5)
 
