@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     resources :users
     resources :drink_ingredients
     resources :ratings
+    post "/login", to: "auth#create"
   end
 
 end

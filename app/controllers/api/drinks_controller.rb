@@ -29,7 +29,7 @@ class Api::DrinksController < ApplicationController
     private
 
     def drink_params
-      params.permit(:name, :direction, :image, :glass, :alcoholic)
+      params.permit(:name, :direction, :image, :glass, :alcoholic, :user_id, ingredient_attributes: [:name])
     end
   end
 
