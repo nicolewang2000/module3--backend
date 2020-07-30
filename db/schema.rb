@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_20_223721) do
+ActiveRecord::Schema.define(version: 2020_07_29_184225) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,6 +29,7 @@ ActiveRecord::Schema.define(version: 2020_07_20_223721) do
     t.string "image"
     t.string "glass"
     t.boolean "alcoholic"
+    t.integer "user_id"
   end
 
   create_table "ingredients", force: :cascade do |t|
@@ -38,6 +39,7 @@ ActiveRecord::Schema.define(version: 2020_07_20_223721) do
   create_table "ratings", force: :cascade do |t|
     t.bigint "drink_id", null: false
     t.bigint "user_id", null: false
+    t.integer "score"
     t.index ["drink_id"], name: "index_ratings_on_drink_id"
     t.index ["user_id"], name: "index_ratings_on_user_id"
   end
@@ -45,6 +47,8 @@ ActiveRecord::Schema.define(version: 2020_07_20_223721) do
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "username"
+    t.string "password"
+    t.string "password_digest"
   end
 
   add_foreign_key "drink_ingredients", "drinks"
