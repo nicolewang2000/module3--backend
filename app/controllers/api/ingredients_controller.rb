@@ -9,11 +9,6 @@ class Api::IngredientsController < ApplicationController
       render json: ingredient
     end
 
-    def create
-      ingredient = Ingredient.create(ingredient_params)
-      render json: ingredient
-    end
-
     private
 
     def ingredient_params

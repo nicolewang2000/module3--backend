@@ -6,16 +6,15 @@ classes.each{|c|
     c.reset_pk_sequence
 }
 
-User.create(name: "Annalise Hunt", username:"annahere", password: BCrypt::Password.create('password'))
-User.create(name: "Madelyn Smith", username:"itsmaddy", password: BCrypt::Password.create('password'))
-User.create(name: "Olivia Grace", username:"livie", password: BCrypt::Password.create('password'))
-User.create(name: "John Smith", username:"johnsmith", password: BCrypt::Password.create('password'))
-User.create(name: "Jane Doe", username:"janedoe", password: BCrypt::Password.create('password'))
-User.create(name: "Bernice Wang", username:"bernicewang", password: BCrypt::Password.create('password'))
+User.create(name: "Annalise Hunt", username:"annahere")
+User.create(name: "Madelyn Smith", username:"itsmaddy")
+User.create(name: "Olivia Grace", username:"livie")
+User.create(name: "John Smith", username:"johnsmith")
+User.create(name: "Jane Doe", username:"janedoe")
+
 
 response1 = HTTParty.get('https://www.thecocktaildb.com/api/json/v1/1/filter.php?a=Alcoholic').parsed_response
 response2 = HTTParty.get('https://www.thecocktaildb.com/api/json/v1/1/filter.php?a=Non_Alcoholic').parsed_response
-# returns array of all the cocktail IDS
 ids = response1['drinks'].map{|d|d['idDrink']}.concat(response2['drinks'].map{|d|d['idDrink']})
 
 def get_info(id)
@@ -25,7 +24,6 @@ end
 ###########################################################################################################################
 
 ids.map{|id|
-    # Get a hash of the drink info
     info = get_info(id)["drinks"][0]
     drink = Drink.create(
         name: info["strDrink"], 
@@ -34,7 +32,6 @@ ids.map{|id|
         image: info["strDrinkThumb"],
         glass: info["strGlass"],
         user_id: 1)
-    # Gets array of all ingredients 
     ingredients = info.keys.select{|k|k.include?('strIngredient') && !info[k].nil?}.map {|k| info[k]}
     measurements = info.keys.select{|k|k.include?('strMeasure') && !info[k].nil?}.map {|k| info[k]}
     ingredients.each{|i| 
@@ -56,12 +53,12 @@ Rating.create(drink_id: 3, user_id: 3, score: 1)
 Rating.create(drink_id: 3, user_id: 4, score: 2)
 Rating.create(drink_id: 4, user_id: 3, score: 2)
 Rating.create(drink_id: 5, user_id: 2, score: 1)
-Rating.create(drink_id: 156, user_id: 6, score: 1)
-Rating.create(drink_id: 157, user_id: 2, score: 3)
-Rating.create(drink_id: 158, user_id: 6, score: 2)
-Rating.create(drink_id: 157, user_id: 3, score: 4)
-Rating.create(drink_id: 158, user_id: 5, score: 4)
-Rating.create(drink_id: 158, user_id: 4, score: 5)
-Rating.create(drink_id: 158, user_id: 6, score: 2)
+Rating.create(drink_id: 156, user_id: 2, score: 1)
+Rating.create(drink_id: 157, user_id: 3, score: 3)
+Rating.create(drink_id: 157, user_id: 2, score: 4)
+Rating.create(drink_id: 158, user_id: 2, score: 2)
+Rating.create(drink_id: 158, user_id: 4, score: 4)
+Rating.create(drink_id: 158, user_id: 3, score: 5)
+Rating.create(drink_id: 158, user_id: 5, score: 2)
 
 

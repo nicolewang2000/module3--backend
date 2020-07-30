@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     resources :drink_ingredients
     resources :ratings
     post "/login", to: "auth#create"
+    get "/ratings/drinks/:drink_id", to: "ratings#drinks"
   end
 
 end
